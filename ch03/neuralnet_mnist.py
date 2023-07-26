@@ -2,6 +2,7 @@ import sys, os
 sys.path.append("C:/Users/user/Desktop/Deep Learning/DeepLearning_from_scratch")
 import numpy as np
 from dataset.mnist import load_mnist
+import pickle
 
 
 # 시그모이드 함수
@@ -23,7 +24,7 @@ def get_data():
     return x_test, t_test
 
 def init_network():
-    with open("sample_weight.pkl", "rb") as f:
+    with open("ch03/sample_weight.pkl", "rb") as f:
         network = pickle.load(f)
 
         return network
@@ -34,11 +35,21 @@ def predict(network, x):
 
     a1 = np.dot(x, W1) + b1
     z1 = sigmoid(a1) # 활성화 함수로 시그모이드 함수 사용
-    a2 = np.dot(x, W2) + b2
+    a2 = np.dot(z1, W2) + b2
     z2 = sigmoid(a2)
-    a3 = np.dot(x, W3) + b3
+    a3 = np.dot(z2, W3) + b3
     y = softmax(a3) # 활성화 함수로 소프트맥스 함수 사용
 
     return y
 
 
+x, t = get_data()
+network = init_network()
+
+accuracy_cnt = 0
+for i in range(len(x)): # 10000번 반복
+    y = predict(network, x[i])
+    p = np.argmax(y) # 확률이 가장 높은 원소의 인덱스를 얻음
+    if p == t[i]:
+        accuracy_cnt += 1
+print("Accuracy: " + str(float(accuracy_cnt) / len(x)))
