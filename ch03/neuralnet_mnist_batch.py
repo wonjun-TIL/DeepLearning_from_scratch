@@ -46,10 +46,13 @@ def predict(network, x):
 x, t = get_data()
 network = init_network()
 
+batch_size = 100   # 배치크기
 accuracy_cnt = 0
-for i in range(len(x)): # 10000번 반복
-    y = predict(network, x[i])
-    p = np.argmax(y) # 확률이 가장 높은 원소의 인덱스를 얻음
-    if p == t[i]:
-        accuracy_cnt += 1
+
+for i in range(0, len(x), batch_size):
+    x_batch = x[i:i+batch_size] # 100개씩 묶음
+    y_batch = predict(network, x_batch)
+    p = np.argmax(y_batch, axis=1) # 100개씩 묶음으로 계산한 결과에서 가장 큰 값의 인덱스를 구함
+    accuracy_cnt += np.sum(p == t[i:i+batch_size])
+
 print("Accuracy: " + str(float(accuracy_cnt) / len(x))) # Accuracy: 0.9352
