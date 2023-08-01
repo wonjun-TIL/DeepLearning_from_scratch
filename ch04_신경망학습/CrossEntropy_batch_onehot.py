@@ -1,5 +1,7 @@
 import numpy as np
 
+
+# 정답 레이블이 원-핫 인코딩일 때
 def cross_entropy_error(y, t):
     if y.ndim == 1:
         t = t.reshape(1, t.size)

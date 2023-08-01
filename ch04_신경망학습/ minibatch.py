@@ -1,5 +1,5 @@
 import sys, os
-sys.path.append("/home/gardenjun/바탕화면/BOAZ/STUDY/Deep Learning")
+sys.path.append("C:/Users/user/Desktop/Deep Learning/DeepLearning_from_scratch")
 import numpy as np
 from dataset.mnist import load_mnist
 
