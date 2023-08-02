@@ -2,6 +2,7 @@ import sys, os
 sys.path.append("C:/Users/user/Desktop/Deep Learning/DeepLearning_from_scratch")
 import numpy as np
 from 미분 import numerical_gradient
+from common.functions import *
 
 class TwoLayerNet:
     def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):
@@ -49,4 +50,5 @@ class TwoLayerNet:
           grads["b2"] = numerical_gradient(loss_W, self.params["b2"])   
 
           return grads
-        
+    
+
