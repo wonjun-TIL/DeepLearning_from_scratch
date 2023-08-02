@@ -1,4 +1,4 @@
-from 곱셈계층 import MulLayer
+from layer_naive import MulLayer
 
 apple = 100
 apple_num = 2
